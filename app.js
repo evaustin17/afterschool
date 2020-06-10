@@ -27,3 +27,42 @@ cameraTrigger.onclick = function() {
 };
 // Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
+
+import com.banuba.sdk.manager.BanubaSdkManager;
+
+public class MainActivity extends Activity {
+    private BanubaSdkManager banubaSdk;
+
+    @Override
+    public void onCreate(Bundle state) {
+        super.onCreate(state);
+        setContentView(R.layout.activity_main);
+
+        banubaSdk = new BanubaSdkManager(this, Pair.create(720, 1280), this);
+
+        final SurfaceView sv = findViewById(R.id.activity_main_surface_view);
+        banubaSdk.onCreate(sv);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        banubaSdk.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        banubaSdk.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        banubaSdk.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        banubaSdk.onDestroy();
